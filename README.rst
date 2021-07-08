@@ -47,7 +47,7 @@ Acknowledgement
 ================
 
 - Design Pattern in Modern C++ course by Dmitri Nesteruk
-- Design Patterns: elements of Reausable Object-Oriented Software by
+- Design Patterns: Elements of Reausable Object-Oriented Software by
     - Erick Gamma
     - Richard Helm
     - Ralph Johson
