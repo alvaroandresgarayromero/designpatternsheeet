@@ -32,7 +32,6 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         $ docker-compose --version
 
 - Build image, and run Docker container:
-
     Any new or existing files that are added/modified are automatically updated in the active container or vice-versa.
 
     .. code-block:: bash
@@ -41,7 +40,6 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         $ docker-compose up
 
 - Running C++ application with the CLI:
-
     Enter Docker Container
 
     .. code-block:: bash
@@ -50,15 +48,14 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         $ sudo docker exec -it cpp_container_latest /bin/bash
         root@5976e1426a62:/app#
 
-    - Generate the build files from the test workspace.
+    Generate the build files from the test workspace.
+    Note that each workspace will have their own CMakeLists.txt to keep them independent.
 
-        Note that each workspace will have their own CMakeLists.txt to keep them independent.
+    .. code-block:: bash
 
-        .. code-block:: bash
-
-            # the test workspace is in the hello_world directory
-            root@5976e1426a62:/app# cd hello_world/
-            root@5976e1426a62:/app/hello_world# cmake -S . -B out
+        # the test workspace is in the hello_world directory
+        root@5976e1426a62:/app# cd hello_world/
+        root@5976e1426a62:/app/hello_world# cmake -S . -B out
 
     - Generate the executable file:
         The executable file will be named "build"
