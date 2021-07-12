@@ -18,29 +18,70 @@ Getting Started
 ================
 
 This workspace utilizes Docker to create a containerized service with all the required
-libraries and dependencies to run the C++ applications. To get started, follow the three main steps
+libraries and dependencies to run the C++ applications. To get started, follow the steps below
 
-- Verify that Docker and Docker-Compose are installed.
+- Install Docker:
+    Verify that Docker and Docker-Compose are installed.
 
-.. code-block:: bash
+    .. code-block:: bash
 
-    # this project used Docker version 20.10.5
-    $ docker --version
+        # this project used Docker version 20.10.5
+        $ docker --version
 
-    # this project used docker-compose version 1.29.1
-    $ docker-compose --version
+        # this project used docker-compose version 1.29.1
+        $ docker-compose --version
+
+- Build image, and run Docker container:
+    - Any new or existing files that are added/modified are automatically updated in the active container or vice-versa.
+
+        .. code-block:: bash
+
+            # This may take a couple of minutes when running for the first time
+            $ docker-compose up
+
+- Running C++ application with the CLI:
+
+    - Enter Docker Container
+
+        .. code-block:: bash
+
+            # the numbers on root@**** is your unique Container ID
+            $ sudo docker exec -it cpp_container_latest /bin/bash
+            root@5976e1426a62:/app#
+
+    - Generate the build files from the test workspace.
+
+        Note that each workspace will have their own CMakeLists.txt to keep them independent.
+
+        .. code-block:: bash
+
+            # the test workspace is in the hello_world directory
+            root@5976e1426a62:/app# cd hello_world/
+            root@5976e1426a62:/app/hello_world# cmake -S . -B out
+
+    - Generate the executable file:
+        The executable file will be named "build"
+
+        .. code-block:: bash
+
+            root@5976e1426a62:/app/hello_world# cd out/
+            root@5976e1426a62:/app/hello_world/out# make
+
+    - Run the executable file:
+
+        .. code-block:: bash
+
+            root@5976e1426a62:/app/hello_world/out# ./build
+            Successfully compiled: Hello World!
+
+- Running C++ with an IDE
+    Container port address is exposed (see docker-compose.yml)
+    so you can connect any IDE from
+    the host computer to the remote host.
+    (ex: I've been using CLion, see their documentation on
+    how to connect with a remote host)
 
 
-- In the root of the project, build the image and container
-
-.. code-block:: bash
-
-    $ docker-compose up
-
-
-- Docker has been set up such that
-    - Any new or existing files that are added/modified are automatically updated in the active container.
-    - Container port address is exposed so you can connect to it from your host computer (ex: IDE editor. I've been using CLion, see their documentation on how to connect with a remote host)
 
 
 Acknowledgement

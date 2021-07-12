@@ -1,0 +1,15 @@
+# local development
+version: "3"
+services:
+  cpp_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cpp_image_latest
+    container_name: cpp_container_latest
+    cap_add:
+      - sys_ptrace
+    volumes:
+      - .:/app
+    ports:
+      - "127.0.0.1:2222:22"
