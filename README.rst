@@ -57,20 +57,19 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         root@5976e1426a62:/app# cd hello_world/
         root@5976e1426a62:/app/hello_world# cmake -S . -B out
 
-    - Generate the executable file:
-        The executable file will be named "build"
+    Generate the executable file. The executable file will be named "build"
 
-        .. code-block:: bash
+    .. code-block:: bash
 
-            root@5976e1426a62:/app/hello_world# cd out/
-            root@5976e1426a62:/app/hello_world/out# make
+        root@5976e1426a62:/app/hello_world# cd out/
+        root@5976e1426a62:/app/hello_world/out# make
 
-    - Run the executable file:
+    Run the executable file.
 
-        .. code-block:: bash
+    .. code-block:: bash
 
-            root@5976e1426a62:/app/hello_world/out# ./build
-            Successfully compiled: Hello World!
+        root@5976e1426a62:/app/hello_world/out# ./build
+        Successfully compiled: Hello World!
 
 - Running C++ with an IDE
     Container port address is exposed (see docker-compose.yml)
