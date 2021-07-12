@@ -37,7 +37,7 @@ libraries and dependencies to run the C++ applications. To get started, follow t
     .. code-block:: bash
 
         # This may take a couple of minutes when running for the first time
-        $ docker-compose up
+        $ sudo docker-compose up
 
 - Running C++ application with the CLI:
     Enter Docker Container
@@ -68,13 +68,16 @@ libraries and dependencies to run the C++ applications. To get started, follow t
 
     .. code-block:: bash
 
+        # Docker ID will printed since application is been
+        # ran from the Docker Container with ID 5976e1426a62
         root@5976e1426a62:/app/hello_world/out# ./build
-        Successfully compiled: Hello World!
+        Hello from 5976e1426a62
 
 - Running C++ with an IDE
-    Container port address is exposed (see docker-compose.yml)
-    so you can connect any IDE from
-    the host computer to the remote host.
+    SSH Port 22 from inside the docker container is exposed
+    to Port 2222 inside the host (see docker-compose.yml)
+    This allows the host to shh into the remote host ( docker container)
+    from any IDE.
     (ex: I've been using CLion, see their documentation on
     how to connect with a remote host)
 

@@ -1,8 +1,17 @@
-/* Simple sanity check to verify health of workspace */
+/*
+ * Simple sanity check to verify health of workspace
+ */
 #include <iostream>
+#include <cstring>
+#include <unistd.h>
 
 int main()
 {
-    std::cout << "Successfully compiled: Hello World!" << std::endl;
+    char hostname[255];
+    memset(hostname, 0, sizeof(hostname));
+    gethostname(hostname, sizeof(hostname));
+
+    std::cout << "Hello from " << hostname << std::endl;
+
     return 0;
 }
