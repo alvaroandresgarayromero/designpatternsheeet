@@ -32,22 +32,23 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         $ docker-compose --version
 
 - Build image, and run Docker container:
-    - Any new or existing files that are added/modified are automatically updated in the active container or vice-versa.
 
-        .. code-block:: bash
+    Any new or existing files that are added/modified are automatically updated in the active container or vice-versa.
 
-            # This may take a couple of minutes when running for the first time
-            $ docker-compose up
+    .. code-block:: bash
+
+        # This may take a couple of minutes when running for the first time
+        $ docker-compose up
 
 - Running C++ application with the CLI:
 
-    - Enter Docker Container
+    Enter Docker Container
 
-        .. code-block:: bash
+    .. code-block:: bash
 
-            # the numbers on root@**** is your unique Container ID
-            $ sudo docker exec -it cpp_container_latest /bin/bash
-            root@5976e1426a62:/app#
+        # the numbers on root@**** is your unique Container ID
+        $ sudo docker exec -it cpp_container_latest /bin/bash
+        root@5976e1426a62:/app#
 
     - Generate the build files from the test workspace.
 
