@@ -40,6 +40,10 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         $ sudo docker-compose up
 
 - Running C++ application with the CLI:
+    The instructions below shows you how to run the
+    C++ application within the docker container through its
+    command line interface (CLI)
+
     Enter Docker Container
 
     .. code-block:: bash
@@ -69,20 +73,27 @@ libraries and dependencies to run the C++ applications. To get started, follow t
     .. code-block:: bash
 
         # Docker ID will printed since application is been
-        # ran from the Docker Container with ID 5976e1426a62
+        # executed from the Docker Container with ID 5976e1426a62
         root@5976e1426a62:/app/hello_world/out# ./build
         Hello from 5976e1426a62
 
 - Running C++ with an IDE
-    SSH Port 22 from inside the docker container is exposed
-    to Port 2222 inside the host (see docker-compose.yml)
-    This allows the host to shh into the remote host ( docker container)
-    from any IDE.
-    (ex: I've been using CLion, see their documentation on
-    how to connect with a remote host)
+    The instructions below shows you how to run the
+    C++ application within the docker container from your host computer IDE.
 
+    - Option 1: Some IDEs have Docker support. Check their documentation on how to connect to the container.
+    - Option 2: Some IDEs don't have Docker support, but have remote host SSH connection support.
+        - This container has exposed SSH Port 22 to Port 2222 for the host to connect to the container, (see docker-compose.yml for the port, and DockerFile for the user credentials).
+        - As of 07/12/2021, remote host connection with Clion IDE works (see their documentation on how to connect to remote host: https://blog.jetbrains.com/clion/2020/01/using-docker-with-clion/#creating-a-docker-container-for-use-with-clion)
 
+    Build and run the test project /hello_world/main.cpp application to verify that the host computer IDE is running the C++ application
+    from the Docker Container. The output should be the active Docker Container ID
 
+    .. code-block:: bash
+
+        # Docker ID will printed since application is been
+        # executed from the Docker Container with ID 5976e1426a62
+        Hello from 5976e1426a62
 
 Acknowledgement
 ================
