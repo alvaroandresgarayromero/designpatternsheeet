@@ -38,6 +38,12 @@ libraries and dependencies to run the C++ applications. To get started, follow t
 
         $ sudo docker-compose up
 
+        # Optionally, to see active docker container id
+        $ sudo docker container ls
+        CONTAINER ID   IMAGE              COMMAND                  CREATED       STATUS          PORTS                    NAMES
+        5976e1426a62   cpp_image_latest   "/usr/sbin/sshd -D -…"   3 weeks ago   Up 14 minutes   127.0.0.1:2222->22/tcp   cpp_container_latest
+
+
 3. Running C++ application with the CLI:
     The instructions below shows you how to run the
     C++ application within the docker container through its
