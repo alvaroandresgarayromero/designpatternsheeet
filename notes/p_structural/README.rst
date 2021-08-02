@@ -1,5 +1,5 @@
 .. meta::
-    :description lang=en: Structural Principles
+    :description lang=en: Structural Pattern
     :keywords: C++, SOLID
 
 ==========
@@ -12,4 +12,6 @@ Overview
 Introduction
 --------------
 
-Place holder
+Structural Pattern software design focuses on API design that makes
+objects usable for other people
+

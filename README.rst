@@ -3,7 +3,7 @@ Introduction
 
 Design Pattern cheatsheet was created as a way to study and collect code snippets of the
 various SOLID design principles.
-This repository follows the Creational, Structural, and Behavioral pattern components as a
+This repository follows the Creational, Structural, and Behavioral software design components as a
 baseline for the project structure.
 
 Cheat Sheet
@@ -32,11 +32,10 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         $ docker-compose --version
 
 - Build image, and run Docker container:
-    Any new or existing files that are added/modified are automatically updated in the active container or vice-versa.
+    This may take a couple of minutes during the first time
 
     .. code-block:: bash
 
-        # This may take a couple of minutes when running for the first time
         $ sudo docker-compose up
 
 - Running C++ application with the CLI:
@@ -87,7 +86,7 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         - As of 07/12/2021, remote host connection with Clion IDE works (see their documentation on how to connect to remote host: https://blog.jetbrains.com/clion/2020/01/using-docker-with-clion/#creating-a-docker-container-for-use-with-clion)
 
     Build and run the test project /hello_world/main.cpp application to verify that the host computer IDE is running the C++ application
-    from the Docker Container. The output should be the active Docker Container ID
+    within the Docker Container. The output should be the active Docker Container ID
 
     .. code-block:: bash
 
