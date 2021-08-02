@@ -36,9 +36,12 @@ libraries and dependencies to run the C++ applications. To get started, follow t
 
     .. code-block:: bash
 
+        # Executes docker container
         $ sudo docker-compose up
 
-        # Optionally, to see active docker container id
+        # Open a new terminal to verify the active docker container is running
+        # Note the container ID as we will use it below to verify a C++ test
+        # app is running within the container.
         $ sudo docker container ls
         CONTAINER ID   IMAGE              COMMAND                  CREATED       STATUS          PORTS                    NAMES
         5976e1426a62   cpp_image_latest   "/usr/sbin/sshd -D -…"   3 weeks ago   Up 14 minutes   127.0.0.1:2222->22/tcp   cpp_container_latest
