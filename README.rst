@@ -20,7 +20,7 @@ Getting Started
 This workspace utilizes Docker to create a containerized service with all the required
 libraries and dependencies to run the C++ applications. To get started, follow the steps below
 
-- Install Docker:
+1. Install Docker:
     Verify that Docker and Docker-Compose are installed.
 
     .. code-block:: bash
@@ -31,14 +31,14 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         # this project used docker-compose version 1.29.1
         $ docker-compose --version
 
-- Build image, and run Docker container:
+2. Build image, and run Docker container:
     This may take a couple of minutes during the first time
 
     .. code-block:: bash
 
         $ sudo docker-compose up
 
-- Running C++ application with the CLI:
+3.a. Running C++ application with the CLI:
     The instructions below shows you how to run the
     C++ application within the docker container through its
     command line interface (CLI)
@@ -76,7 +76,7 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         root@5976e1426a62:/app/hello_world/out# ./build
         Hello from 5976e1426a62
 
-- Running C++ with an IDE
+3.b. Running C++ with an IDE
     The instructions below shows you how to run the
     C++ application within the docker container from your host computer IDE.
 
@@ -85,10 +85,12 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         - This container has exposed SSH Port 22 to Port 2222 for the host to connect to the container, (see docker-compose.yml for the port, and DockerFile for the user credentials).
         - As of 07/12/2021, remote host connection with Clion IDE works (see their documentation on how to connect to remote host: https://blog.jetbrains.com/clion/2020/01/using-docker-with-clion/#creating-a-docker-container-for-use-with-clion)
 
-    Build and run the test project /hello_world/main.cpp application to verify that the host computer IDE is running the C++ application
+    Build and run the test application to verify that the host computer IDE is running the C++ application
     within the Docker Container. The output should be the active Docker Container ID
 
     .. code-block:: bash
+
+        # test application path: .../hello_world/main.cpp
 
         # Docker ID will printed since application is been
         # executed from the Docker Container with ID 5976e1426a62
