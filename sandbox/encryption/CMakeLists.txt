@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16.3)
-project(build1)
+project(build2)
 
 set(CMAKE_CXX_STANDARD 20)
 
