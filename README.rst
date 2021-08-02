@@ -38,7 +38,7 @@ libraries and dependencies to run the C++ applications. To get started, follow t
 
         $ sudo docker-compose up
 
-3.a. Running C++ application with the CLI:
+3. Running C++ application with the CLI:
     The instructions below shows you how to run the
     C++ application within the docker container through its
     command line interface (CLI)
@@ -76,7 +76,7 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         root@5976e1426a62:/app/hello_world/out# ./build
         Hello from 5976e1426a62
 
-3.b. Running C++ with an IDE
+3. Running C++ with an IDE
     The instructions below shows you how to run the
     C++ application within the docker container from your host computer IDE.
 
