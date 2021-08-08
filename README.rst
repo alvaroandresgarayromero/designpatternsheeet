@@ -14,11 +14,25 @@ Cheat Sheet
 - `Structural <notes/p_structural/README.rst>`_
 - `Behavioral <notes/p_behavioral/README.rst>`_
 
-Getting Started
+Author Notes
 ================
 
 This workspace utilizes Docker to create a containerized service with all the required
-libraries and dependencies to run the C++ applications. To get started, follow the steps below
+dependencies to run the C++ applications.
+
+- The "notes" directory is where the "Design Pattern" code base is maintained.
+    - See the "notes" directory for further compilation instructions
+- The "sandbox" directory is where the experimental code is maintained.
+    - See the "sandbox" directory for further compilation instructions
+
+I highly recommend completing the 'Getting Started' section below
+prior to diving into the "notes" and "sandbox" directories.
+
+Getting Started
+================
+
+To get started, let's first run a simple C++ application within
+a Docker container.
 
 1. Install Docker:
     Verify that Docker and Docker-Compose are installed.
@@ -60,28 +74,32 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         $ sudo docker exec -it cpp_container_latest /bin/bash
         root@5976e1426a62:/app#
 
-    Generate the build files from the test workspace.
-    Note that each workspace will have their own CMakeLists.txt to keep them independent.
+    Generate the build files from the test application.
 
     .. code-block:: bash
 
-        # the test workspace is in the hello_world directory
+        # the test application is in the hello_world directory
         root@5976e1426a62:/app# cd hello_world/
-        root@5976e1426a62:/app/hello_world# cmake -S . -B out
 
-    Generate the executable file. The executable file will be named "build"
+        # create folder to store the build files
+        root@5976e1426a62:/app/hello_world# mkdir out
+        root@5976e1426a62:/app/hello_world# cd out
+
+        # generate the build files
+        root@5976e1426a62:/app/hello_world/out# cmake ..
+
+    Generate the executable binary file. The test app executable file created is "build"
 
     .. code-block:: bash
 
-        root@5976e1426a62:/app/hello_world# cd out/
         root@5976e1426a62:/app/hello_world/out# make
 
     Run the executable file.
 
     .. code-block:: bash
 
-        # Docker ID will printed since application is been
-        # executed from the Docker Container with ID 5976e1426a62
+        # The test app will print the hostname from where its executed.
+        # In this example, the Docker Container ID 5976e1426a62 is the hostname for the container.
         root@5976e1426a62:/app/hello_world/out# ./build
         Hello from 5976e1426a62
 
@@ -105,6 +123,7 @@ libraries and dependencies to run the C++ applications. To get started, follow t
         # executed from the Docker Container with ID 5976e1426a62
         Hello from 5976e1426a62
 
+
 Acknowledgement
 ================
 
@@ -114,3 +133,5 @@ Acknowledgement
     - Richard Helm
     - Ralph Johson
     - John Vissides
+- The Coding Nest (Basic CMake, part 2: libraries) by Martin Hořeňovský
+- AWS Developer Tools Blog: Using CMake Exports with the AWS SDK for C++ by Jonathan Henson

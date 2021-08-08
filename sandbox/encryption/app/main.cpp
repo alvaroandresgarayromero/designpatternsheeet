@@ -4,8 +4,12 @@
 #include <iostream>
 #include <cstring>
 #include <unistd.h>
-#include <S3Client.h>
+//#include <aws/core/Aws.h>
+#include <string>
+#include <vector>
+#include <boost/lexical_cast.hpp>
 
+c
 int main()
 {
     char hostname[255];

@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.16.3)
+
+project(Overview VERSION 0.1 LANGUAGES CXX)
+
+add_subdirectory(dependency_inversion_principle)
+add_subdirectory(interface_segregation_principle)
+add_subdirectory(liskov_substitution_principle)
+add_subdirectory(open_closed_principle)

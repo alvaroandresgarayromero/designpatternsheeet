@@ -1,5 +1,6 @@
-# CLion remote docker environment
-# modified from: https://github.com/JetBrains/clion-remote
+# CLion with AWS C++ SDK remote docker environment
+# Clion remote docker environment dockerfile: https://github.com/JetBrains/clion-remote
+# AWS C++ SDK dockerfile: https://github.com/aws/aws-sdk-cpp/blob/master/CI/docker-file/Ubuntu/20.04/Dockerfile
 #
 # Build and run:
 #   docker-compose up
@@ -12,10 +13,11 @@ FROM ubuntu:20.04
 WORKDIR /app
 COPY . /app
 
-RUN DEBIAN_FRONTEND="noninteractive" apt-get update && apt-get -y install tzdata
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    DEBIAN_FRONTEND="noninteractive" TZ="America/Los_Angeles" apt-get install -y tzdata
 
-RUN apt-get update \
-  && apt-get install -y ssh \
+RUN apt-get install -y ssh \
       build-essential \
       gcc \
       g++ \
@@ -24,8 +26,36 @@ RUN apt-get update \
       cmake \
       rsync \
       tar \
-      python \
+      python3 \
+      python3-pip \
+      git \
+      zip \
+      wget \
+      zlib1g-dev \
+      libssl-dev \
+      libcurl4-openssl-dev \
+      openjdk-8-jdk doxygen \
+      ninja-build \
   && apt-get clean
+
+# create 'python3' twin brother named 'python'
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 10
+
+# Install maven
+RUN apt-get install -y maven
+
+# Install awscli
+RUN pip install awscli --upgrade
+
+# Install Boost: Version 1.76.0
+RUN cd /home && wget https://sourceforge.net/projects/boost/files/boost/1.76.0/boost_1_76_0.tar.bz2 \
+    && tar --bzip2 -xf boost_1_76_0.tar.bz2 \
+    && rm boost_1_76_0.tar.bz2 \
+    && cd boost_1_76_0
+    && ./bootstrap.sh --prefix=/usr/local \
+    && ./b2 install \
+    && cd /home \
+    && rm -rf boost_1_76_0
 
 RUN ( \
     echo 'LogLevel DEBUG2'; \
