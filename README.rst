@@ -6,14 +6,6 @@ various SOLID design principles.
 This repository follows the Creational, Structural, and Behavioral software design components as a
 baseline for the project structure.
 
-Cheat Sheet
-============
-
-- `Overview <notes/overview>`_
-- `Creational <notes/p_creational>`_
-- `Structural <notes/p_structural>`_
-- `Behavioral <notes/p_behavioral>`_
-
 Author Notes
 ================
 
@@ -27,6 +19,18 @@ dependencies, and CMake to run the C++ applications.
 
 I highly recommend completing the 'Getting Started' section below
 prior to diving into the "notes" and "sandbox" directories.
+
+Cheat Sheet
+============
+
+- Design Pattern:
+    - `Overview <notes/overview>`_
+    - `Creational <notes/p_creational>`_
+    - `Structural <notes/p_structural>`_
+    - `Behavioral <notes/p_behavioral>`_
+- Sandbox:
+    - `AWS S3 with server-side encryption <sandbox/aws>`_
+    - `AWS Lambda with AWS SQS <sandbox/aws>`_
 
 Getting Started
 ================
@@ -47,7 +51,7 @@ from where its been executed on the terminal.
         $ docker-compose --version
 
 2. Build image, and run Docker container:
-    This will take a couple of minutes (~30 minutes) during the first time
+    This will take some minutes (~30 minutes) during the first time
 
     .. code-block:: bash
 

@@ -4,7 +4,7 @@ project(encryption)
 
 
 add_executable(encryption
-               main.cpp )
+        main.cpp)
 
 # Define the libraries this project depends upon
 find_package(AWSSDK REQUIRED COMPONENTS s3)

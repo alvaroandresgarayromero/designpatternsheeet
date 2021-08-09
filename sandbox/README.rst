@@ -13,7 +13,7 @@ Introduction
 --------------
 
 This a sandbox directory that focuses on experimenting
-with C++ applications through AWS services. This is not related to design patterns.
+with C++ applications with the AWS C++ SDK. This is not related to design patterns.
 
 - Tools used
     - AWS C++ SDK
@@ -21,7 +21,7 @@ with C++ applications through AWS services. This is not related to design patter
     - Docker
 
 - AWS services used
-    - AWS Lambdas (serverless)
-    - S3 Bucket
+    - AWS Lambdas
+    - AWS S3
     - IAM roles
 
