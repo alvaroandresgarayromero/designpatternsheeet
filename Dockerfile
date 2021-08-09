@@ -51,11 +51,22 @@ RUN pip install awscli --upgrade
 RUN cd /home && wget https://sourceforge.net/projects/boost/files/boost/1.76.0/boost_1_76_0.tar.bz2 \
     && tar --bzip2 -xf boost_1_76_0.tar.bz2 \
     && rm boost_1_76_0.tar.bz2 \
-    && cd boost_1_76_0
+    && cd boost_1_76_0 \
     && ./bootstrap.sh --prefix=/usr/local \
     && ./b2 install \
     && cd /home \
     && rm -rf boost_1_76_0
+
+# Install AWS C++ SDK: S3 Bucket, SQS
+RUN cd /home \
+    && git clone --recurse-submodules https://github.com/aws/aws-sdk-cpp \
+    && cd aws-sdk-cpp \
+    && mkdir build \
+    && cd build \
+    && cmake .. -DBUILD_ONLY="s3;sqs" \
+    && make install \
+    && cd /home \
+    && rm -rf aws-sdk-cpp
 
 RUN ( \
     echo 'LogLevel DEBUG2'; \

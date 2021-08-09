@@ -18,7 +18,7 @@ Author Notes
 ================
 
 This workspace utilizes Docker to create a containerized service with all the required
-dependencies to run the C++ applications.
+dependencies, and CMake to run the C++ applications.
 
 - The "notes" directory is where the "Design Pattern" code base is maintained.
     - See the "notes" directory for further compilation instructions
@@ -31,8 +31,9 @@ prior to diving into the "notes" and "sandbox" directories.
 Getting Started
 ================
 
-To get started, let's first run a simple C++ application within
-a Docker container.
+To get started, let's run a simple C++ application within
+a Docker container. The app will print out the device hostname
+from where its been executed on the terminal.
 
 1. Install Docker:
     Verify that Docker and Docker-Compose are installed.
@@ -46,7 +47,7 @@ a Docker container.
         $ docker-compose --version
 
 2. Build image, and run Docker container:
-    This may take a couple of minutes during the first time
+    This will take a couple of minutes (~30 minutes) during the first time
 
     .. code-block:: bash
 
@@ -54,7 +55,7 @@ a Docker container.
         $ sudo docker-compose up
 
         # Open a new terminal to verify the active docker container is running
-        # Note the container ID as we will use it below to verify a C++ test
+        # Note the container ID as we will use it below to verify the C++ test
         # app is running within the container.
         $ sudo docker container ls
         CONTAINER ID   IMAGE              COMMAND                  CREATED       STATUS          PORTS                    NAMES
@@ -64,7 +65,9 @@ a Docker container.
 3. Running C++ application with the CLI:
     The instructions below shows you how to run the
     C++ application within the docker container through its
-    command line interface (CLI)
+    command line interface (CLI).
+
+    See the next step for tips on how to run from an IDE as well.
 
     Enter Docker Container
 
