@@ -9,10 +9,10 @@ baseline for the project structure.
 Cheat Sheet
 ============
 
-- `Overview <notes/overview/README.rst>`_
-- `Creational <notes/p_creational/README.rst>`_
-- `Structural <notes/p_structural/README.rst>`_
-- `Behavioral <notes/p_behavioral/README.rst>`_
+- `Overview <notes/overview>`_
+- `Creational <notes/p_creational>`_
+- `Structural <notes/p_structural>`_
+- `Behavioral <notes/p_behavioral>`_
 
 Author Notes
 ================

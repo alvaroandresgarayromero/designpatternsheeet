@@ -33,9 +33,6 @@ target_include_directories(${LIBRARY_NAME}
                            PRIVATE
                             src)
 
-#target_link_libraries(${LIBRARY_NAME}
-#                      boost )
-
 # Let Cmake create library target as liboverview.a
 # instead of libliboverview.a
 set_target_properties(${LIBRARY_NAME}
@@ -82,3 +79,5 @@ configure_package_config_file(
 install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/${CONFIG_NAME_OUT}.cmake
         DESTINATION ${TARGET_CONFIG_DIR} )
+
+add_subdirectory(test)
