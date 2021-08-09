@@ -10,7 +10,7 @@ int main()
     memset(hostname, 0, sizeof(hostname));
     gethostname(hostname, sizeof(hostname));
 
-    std::cout << "Hello from overview notes: " << hostname << std::endl;
+    std::cout << "Hello from: " << hostname << std::endl;
 
     Journal obj{"Dear Diary"};
     obj.add_entry("I'm writing this from Interface Segregation Principle main");
