@@ -18,15 +18,15 @@ The reason behind using Terraform for provisioning cloud resources is to
 create a habit of using a SaaS that is cloud agnostic. Therefore,
 each AWS project sub-directory will have their own terraform, and app folder.
 
-- To begin, go to the desired AWS project
+To begin, go to the desired AWS project
 
-    .. code-block:: bash
+.. code-block:: bash
 
-        # for example, let's go to encryption
-        root@5976e1426a62:/app/sandbox/aws# cd encryption
-        root@5976e1426a62:/app/sandbox/aws/encryption#
+    # for example, let's go to encryption
+    root@5976e1426a62:/app/sandbox/aws# cd encryption
+    root@5976e1426a62:/app/sandbox/aws/encryption#
 
-- Run Terraform
+Run Terraform
 
     1. Go to the terraform folder
 
