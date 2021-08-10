@@ -19,10 +19,10 @@ create a habit of using a SaaS that is cloud agnostic. Therefore,
 each AWS project sub-directory will have their own terraform, and app folder.
 
 1. To begin, go to the desired AWS project
+    For example, let's run the encryption project
 
     .. code-block:: bash
 
-        # for example, let's go to encryption
         root@5976e1426a62:/app/sandbox/aws# cd encryption
         root@5976e1426a62:/app/sandbox/aws/encryption#
 
