@@ -28,14 +28,14 @@ To begin, go to the desired AWS project
 
 Run Terraform
 
-    - Go to the terraform folder
+    Go to the terraform folder
 
     .. code-block:: bash
 
         root@5976e1426a62:/app/sandbox/aws/encryption# cd terraform
         root@5976e1426a62:/app/sandbox/aws/encryption/terraform#
 
-    - Create a secret.tfvars file with the user AWS credentials. This file will be consumed by terraform to access AWS
+    Create a secret.tfvars file with the user AWS credentials. This file will be consumed by terraform to access AWS
 
     .. code-block:: bash
         # secret.tfvars
@@ -45,20 +45,20 @@ Run Terraform
             "token" = "TOKEN"
         }
 
-    - Initialize terraform
+    Initialize terraform
 
     .. code-block:: bash
 
         root@5976e1426a62:..//encryption/terraform# terraform init
 
-    - Apply terraform (create resources in AWS). Once completed, go to the AWS Console to verify that terraform create the desired resources
+    Apply terraform (create resources in AWS). Once completed, go to the AWS Console to verify that terraform create the desired resources
 
     .. code-block:: bash
 
         root@5976e1426a62:.../encryption/terraform# terraform apply -var-file="secret.tfvars"
 
 
-    - Destroy terraform (to remove AWS resources)
+    Destroy terraform (to remove AWS resources)
 
     .. code-block:: bash
 
