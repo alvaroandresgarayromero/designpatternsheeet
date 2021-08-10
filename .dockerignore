@@ -4,3 +4,8 @@ out/
 cmake-build-debug/
 cmake-build-debug-_docker/
 cmake-build-debug-docker/
+secret.tfvars
+.terraform
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl

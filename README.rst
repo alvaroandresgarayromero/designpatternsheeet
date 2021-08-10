@@ -6,31 +6,24 @@ various SOLID design principles.
 This repository follows the Creational, Structural, and Behavioral software design components as a
 baseline for the project structure.
 
-Author Notes
-================
+Cheat Sheet
+=============
 
 This workspace utilizes Docker to create a containerized service with all the required
-dependencies, and CMake to run the C++ applications.
+dependencies, and CMake to compile the C++ applications.
 
 - The "notes" directory is where the "Design Pattern" code base is maintained.
-    - See the "notes" directory for further compilation instructions
-- The "sandbox" directory is where the experimental code is maintained.
-    - See the "sandbox" directory for further compilation instructions
-
-I highly recommend completing the 'Getting Started' section below
-prior to diving into the "notes" and "sandbox" directories.
-
-Cheat Sheet
-============
-
-- Design Pattern:
     - `Overview <notes/overview>`_
     - `Creational <notes/p_creational>`_
     - `Structural <notes/p_structural>`_
     - `Behavioral <notes/p_behavioral>`_
-- Sandbox:
+
+- The "sandbox" directory is where the experimental code is maintained.
     - `AWS S3 with server-side encryption <sandbox/aws>`_
     - `AWS Lambda with AWS SQS <sandbox/aws>`_
+
+I highly recommend completing the 'Getting Started' section below
+prior to diving into the "notes" and "sandbox" directories.
 
 Getting Started
 ================

@@ -72,8 +72,8 @@ Getting Started
 2. Compile application
     The user (developers) then consume their desired libraries within their own application.
     This project simulates this by creating 5 application projects for each
-    SOLID principle. These applications look for and consume the "Overview" package library
-    in order to consume them, and show their functionalities.
+    SOLID principle. These applications look for and consume the "Overview::liboverview" package library
+    in order to consume them, and use their functionalities.
 
     The steps below show how to create the executable files for the 5 applications.
 
@@ -91,6 +91,10 @@ Getting Started
 
         # create executable files for each application
         /app/notes/overview/app/out# make
+
+    The steps below show an example of how to run the application.
+
+    .. code-block:: bash
 
         # for example, to run the "dependency_inversion_principle"
         /app/notes/overview/app/out# cd dependency_inversion_principle
