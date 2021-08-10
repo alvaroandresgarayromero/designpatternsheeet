@@ -28,42 +28,39 @@ To begin, go to the desired AWS project
 
 Run Terraform
 
-    1. Go to the terraform folder
+    - Go to the terraform folder
 
-        .. code-block:: bash
+    .. code-block:: bash
 
-            root@5976e1426a62:/app/sandbox/aws/encryption# cd terraform
-            root@5976e1426a62:/app/sandbox/aws/encryption/terraform#
+        root@5976e1426a62:/app/sandbox/aws/encryption# cd terraform
+        root@5976e1426a62:/app/sandbox/aws/encryption/terraform#
 
-    2. Create a secret.tfvars file with the user AWS credentials
-        This file will be consumed by terraform to access AWS
+    - Create a secret.tfvars file with the user AWS credentials. This file will be consumed by terraform to access AWS
 
-        .. code-block:: bash
-            # secret.tfvars
-            a_aws_user = {
-                "access_key"  = "<ACCESS_KEY>",
-                "secret_key" = "<SECRET_KEY>",
-                "token" = "TOKEN"
-            }
+    .. code-block:: bash
+        # secret.tfvars
+        a_aws_user = {
+            "access_key"  = "<ACCESS_KEY>",
+            "secret_key" = "<SECRET_KEY>",
+            "token" = "TOKEN"
+        }
 
-    3. Initialize terraform
+    - Initialize terraform
 
-        .. code-block:: bash
+    .. code-block:: bash
 
-            root@5976e1426a62:..//encryption/terraform# terraform init
+        root@5976e1426a62:..//encryption/terraform# terraform init
 
-    4. Apply terraform (create resources in AWS)
-        Once completed, go to the AWS Console to verify that terraform create the
-        desired resources
+    - Apply terraform (create resources in AWS). Once completed, go to the AWS Console to verify that terraform create the desired resources
 
-        .. code-block:: bash
+    .. code-block:: bash
 
-            root@5976e1426a62:.../encryption/terraform# terraform apply -var-file="secret.tfvars"
+        root@5976e1426a62:.../encryption/terraform# terraform apply -var-file="secret.tfvars"
 
 
-    5. Destroy terraform (to remove AWS resources)
+    - Destroy terraform (to remove AWS resources)
 
-        .. code-block:: bash
+    .. code-block:: bash
 
-            root@5976e1426a62:.../encryption/terraform# terraform destroy -var-file="secret.tfvars"
+        root@5976e1426a62:.../encryption/terraform# terraform destroy -var-file="secret.tfvars"
 
