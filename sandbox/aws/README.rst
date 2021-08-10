@@ -26,7 +26,7 @@ To begin, go to the desired AWS project
     root@5976e1426a62:/app/sandbox/aws# cd encryption
     root@5976e1426a62:/app/sandbox/aws/encryption#
 
-Run Terraform
+- Run Terraform
 
     Go to the terraform folder
 
@@ -38,6 +38,7 @@ Run Terraform
     Create a secret.tfvars file with the user AWS credentials. This file will be consumed by terraform to access AWS
 
     .. code-block:: bash
+
         # secret.tfvars
         a_aws_user = {
             "access_key"  = "<ACCESS_KEY>",
