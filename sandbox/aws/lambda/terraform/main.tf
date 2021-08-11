@@ -1,4 +1,3 @@
-# TODO: Designate a cloud provider, region, and credentials
 terraform {
   required_providers {
     aws = {
@@ -11,9 +10,9 @@ terraform {
 }
 
 provider "aws" {
-  access_key = var.a_aws_user[0].access_key
-  secret_key = var.a_aws_user[0].secret_key
-  token = var.a_aws_user[0].token
+  access_key = var.a_aws_user["access_key"]
+  secret_key = var.a_aws_user["secret_key"]
+  token = var.a_aws_user["token"]
   profile = "default"
   region  = var.a_region
 }
@@ -29,8 +28,8 @@ resource "aws_iam_policy" "tf_lambda_policy" {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Effect": "Allow",
-            "Action": [
+            Effect: "Allow",
+            Action: [
                 "sqs:ReceiveMessage",
                 "sqs:DeleteMessage",
                 "sqs:GetQueueAttributes",
@@ -38,7 +37,7 @@ resource "aws_iam_policy" "tf_lambda_policy" {
                 "logs:CreateLogStream",
                 "logs:PutLogEvents"
             ],
-            "Resource": "*"
+            Resource: "*"
         }
     ]
 })

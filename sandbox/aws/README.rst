@@ -13,7 +13,7 @@ Getting Started
 -----------------
 
 This project utilizes Terraform for provisioning, and maintaining AWS Infrastructures, and
-AWS C++ SDK for performing logical operations on the cloud resources.
+AWS C++ SDK for performing operations on the cloud resources.
 The reason behind using Terraform for provisioning cloud resources is to
 create a habit of using a SaaS that is cloud agnostic. Therefore,
 each AWS project sub-directory will have their own terraform, and app folder.
@@ -42,14 +42,14 @@ each AWS project sub-directory will have their own terraform, and app folder.
         a_aws_user = {
             "access_key"  = "<ACCESS_KEY>",
             "secret_key" = "<SECRET_KEY>",
-            "token" = "TOKEN"
+            "token" = "<TOKEN>"
         }
 
     Initialize terraform
 
     .. code-block:: bash
 
-        root@5976e1426a62:..//encryption/terraform# terraform init
+        root@5976e1426a62:../encryption/terraform# terraform init
 
     Apply terraform (create resources in AWS). Once completed, go to the AWS Console to verify that terraform create the desired resources
 
