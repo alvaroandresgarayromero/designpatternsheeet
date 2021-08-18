@@ -18,8 +18,8 @@ The reason behind using Terraform for provisioning cloud resources is to
 create a habit of using a SaaS that is cloud agnostic. Therefore,
 each AWS project sub-directory will have their own terraform, and app folder.
 
-1. To begin, the AWS credentials need to be configure inside the docker container
-    Using environment variables to override any credentials/configuration file.
+1. To begin, AWS credentials need to be configure inside the docker container
+    Using AWS specific environment variables (note this also overrides any credentials/configuration file, if any)
         - Open the aws.env file located in this root folder, and update the environment variables contents with the AWS user keys.
         - Stop the active container, if it is running. Docker needs to consume the updated ENV file.
 
@@ -59,17 +59,6 @@ each AWS project sub-directory will have their own terraform, and app folder.
         root@5976e1426a62:/app/sandbox/aws/encryption# cd terraform
         root@5976e1426a62:/app/sandbox/aws/encryption/terraform#
 
-    Create a secret.tfvars file with the user AWS credentials. This file will be consumed by terraform to access AWS
-
-    .. code-block:: bash
-
-        # secret.tfvars
-        a_aws_user = {
-            "access_key"  = "<ACCESS_KEY>",
-            "secret_key" = "<SECRET_KEY>",
-            "token" = "<TOKEN>"
-        }
-
     Initialize terraform
 
     .. code-block:: bash
@@ -80,12 +69,12 @@ each AWS project sub-directory will have their own terraform, and app folder.
 
     .. code-block:: bash
 
-        root@5976e1426a62:.../encryption/terraform# terraform apply -var-file="secret.tfvars"
+        root@5976e1426a62:.../encryption/terraform# terraform apply
 
 
     Destroy terraform (to remove AWS resources)
 
     .. code-block:: bash
 
-        root@5976e1426a62:.../encryption/terraform# terraform destroy -var-file="secret.tfvars"
+        root@5976e1426a62:.../encryption/terraform# terraform destroy
 
