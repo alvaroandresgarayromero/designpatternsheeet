@@ -37,13 +37,15 @@ int main()
 
         #else
 
-            /* Uses AWS credentials and config files from
-             * /home/user/.aws/ */
-            Aws::S3::S3Client s3_client;
+            /* Initialize AWS user configuration */
+            Aws::Client::ClientConfiguration clientConfig;
+            clientConfig.region = Aws::Region::US_EAST_1;
+
+            Aws::S3::S3Client s3_client(clientConfig);
         #endif
 
         Aws::S3::Model::PutObjectRequest putObjectRequest;
-        putObjectRequest.WithBucket("tf-bucket-encryption").WithKey("sweet4.txt");
+        putObjectRequest.WithBucket("tf-bucket-encryption").WithKey("sweet1993.txt");
 
         //this can be any arbitrary stream (e.g. fstream, stringstream etc...)
         auto requestStream = Aws::MakeShared<Aws::StringStream>("s3-sample");
@@ -62,16 +64,6 @@ int main()
             std::cout << "Error while putting Object " << putObjectOutcome.GetError().GetExceptionName() <<
             " " << putObjectOutcome.GetError().GetMessage() << std::endl;
         }
-
-        //std::cout << s3_client << std::endl;
-
-
-        char hostname[255];
-        memset(hostname, 0, sizeof(hostname));
-        gethostname(hostname, sizeof(hostname));
-
-        std::cout << "Hello from encryption: " << hostname << std::endl;
-
     }
 
     Aws::ShutdownAPI(options);
