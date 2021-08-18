@@ -24,34 +24,34 @@ each AWS project sub-directory will have their own terraform, and app folder.
     Using shared credentials/configuration file
 
     Using environment variables to override shared credentials/configuration file.
-        - Update the aws.env environment variables contents with the AWS user keys. Warning: don't change the environment variables names because terraform and CMakeLists.txt use them.
+        - Open the aws.env file located in this root folder, and update the environment variables contents with the AWS user keys.
         - Stop the active container, if it is running. Docker needs to consume the updated ENV file.
 
-        .. code-block:: bash
+            .. code-block:: bash
 
-            # docker-compose has already been configure to look for the aws.env file.
-            # So we simply need to run it.
-            $ sudo docker-compose up
+                # docker-compose has already been configure to look for the aws.env file.
+                # So we simply need to run it.
+                $ sudo docker-compose up
 
 
         - Verify the environment variables have been set inside the docker container
 
-        .. code-block:: bash
+            .. code-block:: bash
 
-            root@5976e1426a62:/app# echo $AWS_ACCESS_KEY_ID
-            *************
+                root@5976e1426a62:/app# echo $AWS_ACCESS_KEY_ID
+                *************
 
-            root@5976e1426a62:/app# echo $AWS_SECRET_ACCESS_KEY
-            **************
+                root@5976e1426a62:/app# echo $AWS_SECRET_ACCESS_KEY
+                **************
 
         - The CMakeList.txt for each C++ app is always looking for these environment variables during compile time in order to predefine them as macros. So simply enable the OVERRIDE_AWS_CREDENTIALS #define in the C++ application main.c file in order to consume the keys.
 
-        .. code-block:: cpp
+            .. code-block:: cpp
 
-            /* main.cpp */
+                /* main.cpp */
 
-            #define OVERRIDE_AWS_CREDENTIALS
-            //#undef OVERRIDE_AWS_CREDENTIALS
+                #define OVERRIDE_AWS_CREDENTIALS
+                //#undef OVERRIDE_AWS_CREDENTIALS
 
 
 
