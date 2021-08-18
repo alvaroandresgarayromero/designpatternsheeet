@@ -9,7 +9,7 @@
 #include <aws/core/auth/AWSCredentialsProvider.h>
 
 #define OVERRIDE_AWS_CREDENTIALS
-//#undef OVERRIDE_AWS_CREDENTIALS
+#undef OVERRIDE_AWS_CREDENTIALS
 
 
 int main()
@@ -19,7 +19,6 @@ int main()
     options.loggingOptions.logLevel = Aws::Utils::Logging::LogLevel::Trace;
     Aws::InitAPI(options);
     {
-
         #ifdef OVERRIDE_AWS_CREDENTIALS
             /* Initialize AWS user credentials
              * (these macros are predefined during compile time. See CMakeList.txt)*/

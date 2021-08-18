@@ -8,7 +8,7 @@ project(encryption)
 add_executable(encryption
         main.cpp)
 
-# pre-define macros
+# pre-define macros. For debugging and educational purposes.
 target_compile_definitions(encryption PRIVATE
                 ACCESS_KEY="$ENV{AWS_ACCESS_KEY_ID}"
                 SECRET_KEY="$ENV{AWS_SECRET_ACCESS_KEY}")

@@ -19,11 +19,7 @@ create a habit of using a SaaS that is cloud agnostic. Therefore,
 each AWS project sub-directory will have their own terraform, and app folder.
 
 1. To begin, the AWS credentials need to be configure inside the docker container
-    There are two methods currently supported.
-
-    Using shared credentials/configuration file
-
-    Using environment variables to override shared credentials/configuration file.
+    Using environment variables to override any credentials/configuration file.
         - Open the aws.env file located in this root folder, and update the environment variables contents with the AWS user keys.
         - Stop the active container, if it is running. Docker needs to consume the updated ENV file.
 
@@ -44,15 +40,7 @@ each AWS project sub-directory will have their own terraform, and app folder.
                 root@5976e1426a62:/app# echo $AWS_SECRET_ACCESS_KEY
                 **************
 
-        - The CMakeList.txt for each C++ app is always looking for these environment variables during compile time in order to predefine them as macros. So simply enable the OVERRIDE_AWS_CREDENTIALS #define in the C++ application main.c file in order to consume the keys.
-
-            .. code-block:: cpp
-
-                /* main.cpp */
-
-                #define OVERRIDE_AWS_CREDENTIALS
-                //#undef OVERRIDE_AWS_CREDENTIALS
-
+        - Terraform and the AWS C++ SDK will now use these environment variables for authentication.
 
 
 2. Go to the desired AWS project
