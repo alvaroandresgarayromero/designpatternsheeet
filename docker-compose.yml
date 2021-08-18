@@ -11,5 +11,7 @@ services:
       - sys_ptrace
     volumes:
       - .:/app
+    env_file:
+      - ./sandbox/aws/aws.env
     ports:
       - "127.0.0.1:2222:22"

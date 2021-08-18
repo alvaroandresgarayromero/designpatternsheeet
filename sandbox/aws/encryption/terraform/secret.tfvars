@@ -1,5 +1,0 @@
-a_aws_user = {
-    "access_key"  = "ASIAW2GKBYBTLTT5NINY",
-    "secret_key" = "lF+tKopHERN1ow9P7TlH6EElozcGv3AY2CYIyQzl",
-    "token" = "FwoGZXIvYXdzEL3//////////wEaDKLAWRw4rxGZ0OVbSyK8ARtgsXNVHrG2RJU3yImANC6pAOMHSbqMLs5viNh4ntUv59N4vzSio5kpHuqyHNtX4qodHTrJIi/jtU7IrjF9pMiv2QvkUi9/L2xAXaetGztOWeDnaGxFKBKV8lwTy3GA7AcPb6yrkZfdD6XsPLwT7l91Xw8v46j8Ox080n3zNfwE+2zXmjQb5hSyXHwIEBbBN/LEDMhkfm9xwuu6pVfL6hiJ+FMf50KeiWmpLx2BVPQuJjwE8G4SDj9WPFEVKLSsy4gGMi0K06uJQLwL2gmSWG8k3pDT6ste7eGXjGMamvnafBqhlDOqrM6J1RRYqP9UA0s="
-}
