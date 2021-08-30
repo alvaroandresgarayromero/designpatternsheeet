@@ -1,23 +1,25 @@
+#include <aws/lambda-runtime/runtime.h>
+#include <aws/core/utils/json/JsonSerializer.h>
+#include <string>
 
+using namespace Aws::Utils::Json;
 
-#include <iostream>
-#include <cstring>
-#include <unistd.h>
+aws::lambda_runtime::invocation_response lambda_handler( aws::lambda_runtime::invocation_request const& request)
+{
+    Aws::Utils::Json::JsonValue json(request.payload);
 
-#include <aws/core/Aws.h>
+    if (!json.WasParseSuccessful()) {
+        return aws::lambda_runtime::invocation_response::failure("Failed to parse input JSON", "InvalidJSON");
+    }
+
+    Aws::String aws_s = json.View().WriteReadable();
+    std::string s(aws_s.c_str(), aws_s.size());
+
+    return aws::lambda_runtime::invocation_response::success(s, "application/json");
+}
 
 int main()
 {
-   // Aws::InitAPI();
-
-    char hostname[255];
-    memset(hostname, 0, sizeof(hostname));
-    gethostname(hostname, sizeof(hostname));
-
-    std::cout << "Hello from lambda: " << hostname << std::endl;
-
-    // @todo uses AWS SQS to send message to trigger lambda function
-
-
+    aws::lambda_runtime::run_handler(lambda_handler);
     return 0;
 }

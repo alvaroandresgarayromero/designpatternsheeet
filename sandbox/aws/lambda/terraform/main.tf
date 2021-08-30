@@ -10,9 +10,6 @@ terraform {
 }
 
 provider "aws" {
-  access_key = var.a_aws_user["access_key"]
-  secret_key = var.a_aws_user["secret_key"]
-  token = var.a_aws_user["token"]
   profile = "default"
   region  = var.a_region
 }
@@ -43,8 +40,8 @@ resource "aws_iam_policy" "tf_lambda_policy" {
 })
 }
 
-# Using Terraform Data Source to create "Assume Role Policy"
-data "aws_iam_policy_document" "tf_lambda_asume_role" {
+# Using Terraform Data Source to create Trust Relationship: "Assume Role Policy"
+data "aws_iam_policy_document" "tf_lambda_assume_role" {
   statement {
     actions = ["sts:AssumeRole"]
 
@@ -57,10 +54,10 @@ data "aws_iam_policy_document" "tf_lambda_asume_role" {
 
 # Using Terraform to create Role for lambda service to use
 # - This role utilizes the tf_lambda_policy for permissions
-# - This role utilizes the tf_lambda_assume_role to allow Lambda to assume this role
+# - This role utilizes the tf_lambda_assume_role to enable Lambda to assume this role
 resource "aws_iam_role" "tf_lambda_role" {
   name                = "tf_lambda_role"
-  assume_role_policy  = data.aws_iam_policy_document.tf_lambda_asume_role.json
+  assume_role_policy  = data.aws_iam_policy_document.tf_lambda_assume_role.json
   managed_policy_arns = [aws_iam_policy.tf_lambda_policy.arn]
 }
 

@@ -12,5 +12,6 @@ Overview
 Introduction
 --------------
 
-This a sandbox directory that focuses on experimenting
-with the AWS C++ SDK and Terraform. This is not related to design patterns.
+This directory is not related to design patterns. Its main focus is
+staying in the C++ realm, but expanding to other tools by exploring the AWS C++ SDK, and Terraform for
+configuring the AWS infrastructure.

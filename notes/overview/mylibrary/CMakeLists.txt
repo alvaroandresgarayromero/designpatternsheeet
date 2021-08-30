@@ -12,8 +12,10 @@ set(LIBRARY_NAME ${LIB_NAME_1}${LIB_NAME_2})
 include(GNUInstallDirs) # defines the default install paths for Linux
 set(TARGET_CONFIG_NAME ${PROJECT_NAME}Targets) # OverviewTargets.cmake
 set(TARGET_CONFIG_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${LIB_NAME_2}) # <prefix>/lib/cmake/overview
-set(HEADER_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${LIB_NAME_2}) # <prefix>/lib/cmake/overview
+set(HEADER_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${LIB_NAME_2}) # <prefix>/include/overview
 
+message(STATUS "temp1:  ${CMAKE_INSTALL_LIBDIR}/cmake/${LIB_NAME_2}")
+message(STATUS "temp2: ${CMAKE_INSTALL_INCLUDEDIR}/${LIB_NAME_2}")
 
 #########################################################
 # set up LIBRARY name (liboverview) and target settings
@@ -21,6 +23,13 @@ set(HEADER_DIR ${CMAKE_INSTALL_INCLUDEDIR}/${LIB_NAME_2}) # <prefix>/lib/cmake/o
 # create static library
 add_library(${LIBRARY_NAME} STATIC
             src/Journal.cpp )
+
+# Currently, this Cmake only supports static or dynamic library target at a time.
+# We could change STATIC to SHARED, and then the target would be pointing to a dynamic library.
+# In the consumer end, find_package() would find the CONFIG file which contains info of where the library target is pointing to.
+# @todo: create cmake that can create both static and shared library at the same time.
+#add_library(${LIBRARY_NAME} SHARED
+#             src/Journal.cpp )
 
 
 # inform Cmake where include files are located for

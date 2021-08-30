@@ -8,7 +8,11 @@ add_executable(dependency_inversion_principle
 
 
 # Define the libraries this project depends upon
-find_package(Overview REQUIRED)
+
+find_package(Overview REQUIRED COMPONENTS overview)
 
 target_link_libraries(dependency_inversion_principle
                       Overview::liboverview)
+
+message(STATUS "The BoostLIBRARIES are  ${CMAKE_FIND_LIBRARY_SUFFIXES}")
+

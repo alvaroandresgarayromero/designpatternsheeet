@@ -68,6 +68,19 @@ RUN cd /home \
     && cd /home \
     && rm -rf aws-sdk-cpp
 
+
+# Install AWS Lambda runtime (yes separate dependency from AWS C++ SDK)
+# Enables us to create C++ lambda functions
+RUN cd /home \
+    && git clone https://github.com/awslabs/aws-lambda-cpp.git \
+    && cd aws-lambda-cpp \
+    && mkdir build \
+    && cd build \
+    && cmake .. -DCMAKE_BUILD_TYPE=Release \
+    && make install \
+    && cd /home \
+    && rm -rf aws-lambda-cpp
+
 # Install Terraform
 RUN cd /home \
     && apt-get update && apt-get install -y gnupg software-properties-common curl \
