@@ -23,6 +23,7 @@ Getting Started
 
 1. Set the AWS credentials
     Verify that your user AWS credentials are configured inside the active docker container
+
         - Use environment variables provided under the 'aws' directory to source into docker
         - Or run '$ aws configure' on the CLI. Follow the prompt.
 
@@ -44,7 +45,6 @@ Getting Started
         root@5976e1426a62:/app/sandbox/aws/lambda/lambda_function/build# make aws-lambda-package-lambda
 
 3. Deploy lambda and SQS with all its configurations into AWS using Terraform
-
     Go to the lambda_function build directory, and move the 'lambda.zip' file into the terraform folder
 
     .. code-block:: bash
