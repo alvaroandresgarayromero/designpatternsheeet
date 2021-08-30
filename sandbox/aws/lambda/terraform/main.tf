@@ -62,21 +62,21 @@ resource "aws_iam_role" "tf_lambda_role" {
 }
 
 # Using Terraform to zip python file
-data "archive_file" "lambda_archive" {
-  type        = "zip"
-  source_file = "greet_lambda.py"
-  output_path = "lambda_function.zip"
-}
+#data "archive_file" "lambda_archive" {
+#  type        = "zip"
+#  source_file = "greet_lambda.py"
+#  output_path = "lambda_function.zip"
+#}
 
 
 # Using Terraform to create Lambda service
 resource "aws_lambda_function" "tf_lambda" {
-  filename      = "lambda_function.zip" 
+  filename      = "lambda.zip"
   package_type  = "Zip" 
   function_name = "tf_lambda_function"
   role          = aws_iam_role.tf_lambda_role.arn
-  runtime       = "python3.8"
-  handler       = "greet_lambda.lambda_handler"
+  runtime       = "provided"
+  handler       = "lambda"
 
   environment {
     variables = {

@@ -40,7 +40,10 @@ each AWS project sub-directory will have their own terraform, and app folder.
                 root@5976e1426a62:/app# echo $AWS_SECRET_ACCESS_KEY
                 **************
 
-        - Terraform and the AWS C++ SDK will now use these environment variables for authentication. Defaults to US_EAST_1
+                root@5976e1426a62:/app# echo $AWS_DEFAULT_REGION
+                **************
+
+        - Terraform and the AWS C++ SDK will now use these environment variables for authentication.
 
 
 2. Go to the desired AWS project

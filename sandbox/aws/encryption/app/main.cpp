@@ -39,7 +39,9 @@ int main()
 
             /* Initialize AWS user configuration */
             Aws::Client::ClientConfiguration clientConfig;
-            clientConfig.region = Aws::Region::US_EAST_1;
+
+            // overwrite if desired
+            //clientConfig.region = Aws::Region::US_EAST_1;
 
             Aws::S3::S3Client s3_client(clientConfig);
         #endif
