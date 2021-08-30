@@ -42,7 +42,7 @@ Getting Started
 
     .. code-block:: bash
 
-        root@5976e1426a62:/app/sandbox/aws/lambda/lambda_function/build# make aws-lambda-package-lambda
+        root@5976e1426a62:/app/sandbox/aws/lambda/lambda_function/out# make aws-lambda-package-lambda
 
 3. Deploy lambda and SQS with all its configurations into AWS using Terraform
     Go to the lambda_function build directory, and move the 'lambda.zip' file into the terraform folder
@@ -64,6 +64,7 @@ Getting Started
     The payload value will be written into lambda_output.txt.
 
     .. code-block:: bash
+
         aws lambda invoke --function-name tf_lambda_function \
                    --payload '{"name": "Alvaro", "message": "This was processed by AWS Lambda" }' \
                    lambda_output.txt
