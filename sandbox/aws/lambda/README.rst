@@ -28,7 +28,7 @@ Getting Started
         - Or run '$ aws configure' on the CLI. Follow the prompt.
 
 2. Create C++ package lambda executable with all its dependencies
-    Go to the lambda_function directory, and compile the executable in a build directory
+    Go to the lambda_function directory, and compile the C++ application in a build directory
 
     .. code-block:: bash
 

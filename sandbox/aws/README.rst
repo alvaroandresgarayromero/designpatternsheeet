@@ -46,38 +46,12 @@ each AWS project sub-directory will have their own terraform, and app folder.
         - Terraform and the AWS C++ SDK will now use these environment variables for authentication.
 
 
-2. Go to the desired AWS project
-    For example, let's run the encryption project
+    OR use the aws CLI to set the aws credentials
 
     .. code-block:: bash
 
-        root@5976e1426a62:/app/sandbox/aws# cd encryption
-        root@5976e1426a62:/app/sandbox/aws/encryption#
-
-2. Run Terraform
-    Go to the terraform folder
-
-    .. code-block:: bash
-
-        root@5976e1426a62:/app/sandbox/aws/encryption# cd terraform
-        root@5976e1426a62:/app/sandbox/aws/encryption/terraform#
-
-    Initialize terraform
-
-    .. code-block:: bash
-
-        root@5976e1426a62:../encryption/terraform# terraform init
-
-    Apply terraform (create resources in AWS). Once completed, go to the AWS Console to verify that terraform create the desired resources
-
-    .. code-block:: bash
-
-        root@5976e1426a62:.../encryption/terraform# terraform apply
-
-
-    Destroy terraform (to remove AWS resources)
-
-    .. code-block:: bash
-
-        root@5976e1426a62:.../encryption/terraform# terraform destroy
-
+        $ aws configure
+        AWS Access Key ID [None]: ***************
+        AWS Secret Access Key [None]: ***************
+        Default region name [None]: *****
+        Default output format [None]: json
