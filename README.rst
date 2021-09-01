@@ -10,7 +10,7 @@ Cheat Sheet
 =============
 
 This workspace utilizes Docker to create a containerized service with all the required
-dependencies, and CMake to compile the C++ applications.
+dependencies, and CMake to create the build files for compiling the C++ applications.
 
 - The "notes" directory is where the "Design Pattern" code base is maintained.
     - `Overview <notes/overview>`_

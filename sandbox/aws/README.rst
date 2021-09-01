@@ -20,6 +20,7 @@ each AWS project sub-directory will have their own terraform, and app folder.
 
 1. To begin, AWS credentials need to be configure inside the docker container
     Using AWS specific environment variables (note this also overrides any credentials/configuration file, if any)
+
         - Open the aws.env file located in this root folder, and update the environment variables contents with the AWS user keys.
         - Stop the active container, if it is running. Docker needs to consume the updated ENV file.
 

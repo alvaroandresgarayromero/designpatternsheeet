@@ -13,9 +13,10 @@ Description
 -------------
 
 In this project, we utilize aws lambda runtime library to create a C++ lambda function, and
-Terraform to deploy the lambda and SQS resources into AWS. Then we use the AWS C++ SDK to
+Terraform to deploy the lambda, S3, and SQS resources into AWS. Then we use the AWS C++ SDK to
 perform logic operations on AWS SQS to trigger the C++ lambda function. The lambda function
-will return a human readable json string payload, in which the parameters we will be able to configure.
+will return a human readable json string payload and also write an object with the payload contents
+into the S3 Bucket, in which the payload parameters we will be able to configure.
 
 
 Getting Started
@@ -61,10 +62,25 @@ Getting Started
         root@5976e1426a62:/app/sandbox/aws/lambda/terraform# terraform apply
 
     Verify aws lambda is functional by triggering lambda with the AWS CLI.
-    The payload value will be written into lambda_output.txt.
+    The payload value will be written into lambda_output.txt
+
+    .. code-block:: bash
+
+        echo '{"name": "Alvaro", "message": "This was processed by AWS Lambda" }' > clean_payload.txt
+
+    .. code-block:: bash
+
+        openssl base64 -out encoded_payload.txt -in clean_payload.txt
 
     .. code-block:: bash
 
         aws lambda invoke --function-name tf_lambda_function \
-                   --payload '{"name": "Alvaro", "message": "This was processed by AWS Lambda" }' \
+                   --payload file://encoded_payload.txt \
                    lambda_output.txt
+
+    Verify aws lambda is functional by triggering lambda with the AWS CLI.
+    The payload value will be written into an object in S3 bucket.
+
+    .. code-block:: bash
+
+        aws s3 cp s3://tf-bucket/payload.txt .
