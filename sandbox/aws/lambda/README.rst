@@ -13,11 +13,16 @@ Description
 -------------
 
 In this project, we utilize aws lambda runtime library to create a C++ lambda function, and
-Terraform to deploy the lambda, S3, and SQS resources into AWS. Then we use the AWS C++ SDK to
-perform logic operations on AWS SQS to trigger the C++ lambda function. The lambda function
-will return a human readable json string payload and also write an object with the payload contents
-into the S3 Bucket, in which the payload parameters we will be able to configure.
+Terraform to deploy lambda, S3, and SQS resources into AWS. Then we use the AWS C++ SDK to create a C++ app
+to perform logical operations on AWS SQS to trigger the C++ lambda function as well as send some payload data.
+The lambda function process will create an object inside the S3 bucket with the payload data in a human readable json string.
+Finally, the app will retrieve, and download the object file from S3 bucket into our local host.
 
+The signal path in summary is as follow:
+
+   C++ app communicates with SQS (triggers lambda and send payload) --->
+   C++ lambda function (writes payload into an object in S3 bucket) --->
+   C++ app downloads the object with the payload from S3 bucket to host
 
 Getting Started
 -----------------
@@ -45,7 +50,7 @@ Getting Started
 
         root@5976e1426a62:/app/sandbox/aws/lambda/lambda_function/out# make aws-lambda-package-lambda
 
-3. Deploy lambda and SQS with all its configurations into AWS using Terraform
+3. Deploy lambda, S3, and SQS with all its configurations into AWS using Terraform
     Go to the lambda_function build directory, and move the 'lambda.zip' file into the terraform folder
 
     .. code-block:: bash
