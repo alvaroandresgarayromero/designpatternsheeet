@@ -20,9 +20,9 @@ Finally, the app will retrieve, and download the object file from S3 bucket into
 
 The signal path in summary is as follow:
 
-   C++ app communicates with SQS (triggers lambda and send payload) --->
-   C++ lambda function (writes payload into an object in S3 bucket) --->
-   C++ app downloads the object with the payload from S3 bucket to host
+   - C++ app communicates with SQS (triggers lambda and send payload) --->
+   - C++ lambda function (writes payload into an object in S3 bucket) --->
+   - C++ app downloads the object with the payload from S3 bucket to host
 
 Getting Started
 -----------------
