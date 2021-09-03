@@ -5,8 +5,6 @@
 #include <aws/s3/model/PutObjectRequest.h>
 #include <aws/s3/model/GetObjectRequest.h>
 #include <aws/core/auth/AWSCredentialsProvider.h>
-#include <aws/core/platform/Environment.h>
-
 
 #include <string>
 
@@ -57,11 +55,6 @@ void dump_s3( std::string const& payload, Aws::S3::S3Client const& s3_client)
     }
 }
 
-//int main()
-//{
-//    aws::lambda_runtime::run_handler(lambda_handler);
-//    return 0;
-//}
 int main()
 {
     /* Init required parameters for AWS initialization routine */
