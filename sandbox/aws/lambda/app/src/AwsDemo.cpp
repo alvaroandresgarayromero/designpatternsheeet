@@ -60,7 +60,9 @@ const Aws::Vector<Aws::SQS::Model::Message> AwsDemo::get_sqs_messages()
     {
         AWS_DEMO_ASSERT(ALWAYS_ASSERT,
                         "SQS: No messages received from queue " + m_queueUrl + ". " +
-                        "Go to the AWS SQS Console and check if the message is in the dead letter queue")
+                        "Go to the AWS SQS Console and check if the message is in the dead letter queue. " +
+                        "This will occur if there is an SQS event message error that caused it not to be deliverable. " +
+                        "For instance, verify policy permissions are configure correctly.")
     }
 
     return messages;
@@ -113,6 +115,26 @@ void AwsDemo::sqs_message_display(const Aws::SQS::Model::Message &msg_sqs )
 
 }
 
+/* DESCRIPTION: Parses and checks SQS message body contains "requestContext[condition]" as 'Success'.
+ *              Success value means AWS lambda completed processing with no errors
+ * INPUT: SQS message object
+ * OUTPUT: True/False : requestContext[condition] passed/requestContext[condition] failed
+ */
+bool AwsDemo::sqs_isMsgSuccess(const Aws::SQS::Model::Message &msg_sqs )
+{
+    Aws::Utils::Json::JsonValue json_sqs_data(msg_sqs.GetBody());
+    AWS_DEMO_ASSERT(json_sqs_data.WasParseSuccessful(),
+                    "SQS: Failed to parse data contents into human readable json format")
+
+    auto value = json_sqs_data.View()
+                              .GetObject("requestContext")
+                              .GetObject("condition").AsString();
+
+
+    return (value == "Success");
+
+
+}
 
 /* DESCRIPTION: Gets object from S3 bucket
  * INPUT: None

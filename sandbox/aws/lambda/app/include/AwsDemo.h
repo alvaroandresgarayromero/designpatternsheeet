@@ -66,6 +66,7 @@ public:
     const Aws::Vector<Aws::SQS::Model::Message> get_sqs_messages();
     void delete_sqs_message(const Aws::SQS::Model::Message &msg_sqs);
     void sqs_message_display(const Aws::SQS::Model::Message &msg_sqs );
+    bool sqs_isMsgSuccess(const Aws::SQS::Model::Message &msg_sqs );
 
     /* S3 helper methods */
     Aws::S3::Model::GetObjectOutcome get_s3_object_content();

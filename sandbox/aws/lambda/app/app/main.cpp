@@ -7,6 +7,7 @@
 #include "AwsDemoSqsBuilder.h"
 #include "AwsDemoS3Builder.h"
 #include "AwsDemoSnsBuilder.h"
+#include "utils.h"
 
 int main()
 {
@@ -32,6 +33,10 @@ int main()
         auto messages = awsdemo.get_sqs_messages();
         auto message = messages[0];
         awsdemo.sqs_message_display(message);
+
+        AWS_DEMO_ASSERT(awsdemo.sqs_isMsgSuccess(message),
+                        "SQS: Error during AWS Lambda processing. See SQS message for more.")
+
         awsdemo.delete_sqs_message(message);
 
         /* AWS Lambda wrote an object with the payload contents to AWS S3 */
