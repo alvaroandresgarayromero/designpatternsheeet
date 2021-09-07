@@ -5,8 +5,6 @@
 #include <string>
 #include <memory>
 
-//#include <aws/core/Aws.h>
-
 #include <aws/sqs/SQSClient.h>
 #include <aws/sqs/model/ReceiveMessageRequest.h>
 #include <aws/sqs/model/DeleteMessageRequest.h>
