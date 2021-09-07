@@ -63,7 +63,7 @@ RUN cd /home \
     && cd aws-sdk-cpp \
     && mkdir build \
     && cd build \
-    && cmake .. -DBUILD_ONLY="s3;sqs" \
+    && cmake .. -DBUILD_ONLY="s3;sqs;sns" \
     && make install \
     && cd /home \
     && rm -rf aws-sdk-cpp
