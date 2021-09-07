@@ -65,11 +65,13 @@ public:
     void publish_sns_message();
 
     /* SQS helper methods */
-    const Aws::Vector<Aws::SQS::Model::Message> read_sqs_messages();
+    const Aws::Vector<Aws::SQS::Model::Message> get_sqs_messages();
     void delete_sqs_message(const Aws::SQS::Model::Message &msg_sqs);
+    void sqs_message_display(const Aws::SQS::Model::Message &msg_sqs );
 
     /* S3 helper methods */
-    void display_s3_object_content();
+    Aws::S3::Model::GetObjectOutcome get_s3_object_content();
+    void s3_object_content_display(Aws::S3::Model::GetObjectOutcome& s3_object);
 
     friend class AwsDemoBuilder;
     friend class AwsDemoSqsBuilder;
