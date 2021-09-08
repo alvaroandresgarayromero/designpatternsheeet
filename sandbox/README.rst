@@ -13,5 +13,4 @@ Introduction
 --------------
 
 This directory is not related to design patterns. Its main focus is
-staying in the C++ realm, but expanding to other tools by exploring the AWS C++ SDK, and Terraform for
-configuring the AWS infrastructure.
+staying in the C++ realm, but expanding to other tools by exploring the AWS C++ SDK, and Terraform.

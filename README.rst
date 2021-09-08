@@ -19,8 +19,8 @@ dependencies, and CMake to create the build files for compiling the C++ applicat
     - `Behavioral <notes/p_behavioral>`_
 
 - The "sandbox" directory is where the experimental code is maintained.
-    - `AWS S3 with server-side encryption <sandbox/aws>`_
-    - `AWS Lambda with AWS SQS <sandbox/aws>`_
+    - `AWS S3 <sandbox/aws/server-side-encryption>`_
+    - `AWS Lambda <sandbox/aws/lambda>`_
 
 I highly recommend completing the 'Getting Started' section below
 prior to diving into the "notes" and "sandbox" directories.
