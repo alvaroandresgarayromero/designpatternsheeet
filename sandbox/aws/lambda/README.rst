@@ -15,10 +15,11 @@ Description
 In this project, we utilize aws lambda runtime library to create a C++ lambda function, and
 Terraform to deploy lambda, S3, SNS, and SQS resources into AWS. Then we use the AWS C++ SDK and a
 custom library called 'awsdemo' to construct a C++ app to perform logical operations.
-AWS SNS will publish and trigger a asynchronous invocation to the C++ lambda function with some payload data.
-The lambda function process will read and create an object inside the S3 bucket with the payload data in a human readable json format.
-The app will use AWS SQS to verify whether the AWS lambda processing response was successful or not.
-If successful, the app will retrieve, and print out the object file contents from the S3 bucket.
+AWS SNS will publish a message, and trigger asynchronous invocations to aws lambda.
+The lambda function process will consume the message, and store in a text file inside an S3 bucket.
+The payload data will be writen in human readable json format.
+Finally, the app will use AWS SQS to verify whether the AWS lambda processing response was successful or not.
+If successful, then lambda wrote into S3 successfully, and the app will retrieve, and print out the object file contents on to the console.
 
 The signal path in summary is as shown below:
 
@@ -67,7 +68,7 @@ Getting Started
         root@5976e1426a62:/app/sandbox/aws/lambda/terraform# terraform init
         root@5976e1426a62:/app/sandbox/aws/lambda/terraform# terraform apply
 
-    Verify aws lambda is functional by triggering lambda with the AWS CLI.
+    Verify aws lambda is functional by triggering synchronously lambda with the AWS CLI.
     The payload value will be written into lambda_output.txt
 
     .. code-block:: bash
@@ -90,3 +91,28 @@ Getting Started
     .. code-block:: bash
 
         aws s3 cp s3://tf-bucket/payload.txt .
+
+4. Compile the C++ app
+    Go to the app directory, and compile the application
+
+    .. code-block:: bash
+
+        mkdir out
+
+    .. code-block:: bash
+
+        cd out
+
+    .. code-block:: bash
+
+        cmake ..
+
+    .. code-block:: bash
+
+        make
+
+    Run the application
+
+    .. code-block:: bash
+
+        ./app
