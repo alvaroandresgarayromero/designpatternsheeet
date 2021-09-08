@@ -13,16 +13,17 @@ Description
 -------------
 
 In this project, we utilize aws lambda runtime library to create a C++ lambda function, and
-Terraform to deploy lambda, S3, and SQS resources into AWS. Then we use the AWS C++ SDK to create a C++ app
-to perform logical operations on AWS SQS to trigger the C++ lambda function as well as send some payload data.
-The lambda function process will create an object inside the S3 bucket with the payload data in a human readable json string.
-Finally, the app will retrieve, and download the object file from S3 bucket into our local host.
+Terraform to deploy lambda, S3, SNS, and SQS resources into AWS. Then we use the AWS C++ SDK and a
+custom library called 'awsdemo' to construct a C++ app to perform logical operations.
+AWS SNS will publish and trigger a asynchronous invocation to the C++ lambda function with some payload data.
+The lambda function process will read and create an object inside the S3 bucket with the payload data in a human readable json format.
+The app will use AWS SQS to verify whether the AWS lambda processing response was successful or not.
+If successful, the app will retrieve, and print out the object file contents from the S3 bucket.
 
-The signal path in summary is as follow:
+The signal path in summary is as shown below:
 
-   - C++ app communicates with SQS (triggers lambda and send payload) --->
-   - C++ lambda function (writes payload into an object in S3 bucket) --->
-   - C++ app downloads the object with the payload from S3 bucket to host
+.. image:: aws_demo.png
+   :width: 400
 
 Getting Started
 -----------------

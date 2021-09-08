@@ -19,11 +19,11 @@ int main()
 
         /* Construct AWS DEMO */
         AwsDemo awsdemo = AwsDemo::create()
-                          .sns().has_topic_arn_name("arn:aws:sns:us-east-1:867387895277:tf_topic_test")
-                                .has_message_content("This message is published by SNS as a payload to AWS lambda")
-                          .sqs().has_url_name("https://sqs.us-east-1.amazonaws.com/867387895277/tf_queue_2")
-                          .s3().has_bucket_name("buckettestalvaro")
-                               .has_key_name("test20.txt");
+                          .sns().has_topic_arn_name("arn:aws:sns:us-east-1:867387895277:tf_topic")
+                                .has_message_content("This NEW message is published by SNS as a payload to AWS lambda")
+                          .sqs().has_url_name("https://sqs.us-east-1.amazonaws.com/867387895277/tf_queue")
+                          .s3().has_bucket_name("tf-bucket")
+                               .has_key_name("payload.txt");
 
         /* AWS SNS is used to create asynchronous event trigger to AWS Lambda */
         awsdemo.publish_sns_message();

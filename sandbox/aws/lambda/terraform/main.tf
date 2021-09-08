@@ -14,6 +14,9 @@ provider "aws" {
   region  = var.a_region
 }
 
+# Get access to AWS Account ID, User ID, and ARN
+data "aws_caller_identity" "current" {}
+
 # Use Terraform to create S3 Bucket for lambda to write to
 resource "aws_s3_bucket" "tf_bucket" {
   bucket = "tf-bucket"
@@ -37,9 +40,82 @@ resource "aws_s3_bucket_public_access_block" "tf_bucket" {
   restrict_public_buckets = true
 }
 
-# Using Terraform IAM policy to create policy with SQS and CloudWatch permissions
-# This policy is identical to: AWSLambdaSQSQueueExecutionRole
-# Plus enable lambda only write access into our S3 bucket
+# Use Terraform to create SQS Service
+# SQS Event failures related to the queue go to the dead letter queue
+resource "aws_sqs_queue" "tf_dead_letter_queue" {
+  name                       = "tf_dead_letter_queue"
+  delay_seconds              = 0
+  max_message_size           = 262144 # 256 KB
+  message_retention_seconds  = 86400  #  1 day
+  receive_wait_time_seconds  = 0      # seconds
+  visibility_timeout_seconds = 30     # seconds
+
+  fifo_queue                  = false
+}
+
+# Apply principle of least privilege on the SQS
+# owner allows permission for lambda and SDK.
+resource "aws_sqs_queue_policy" "tf_dead_letter_queue_access_policy" {
+  queue_url = aws_sqs_queue.tf_dead_letter_queue.id
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Id": "sqspolicy",
+    "Statement": [
+      {
+        Sid: "_owner_statement",
+        Effect: "Allow",
+        Principal: {
+          "AWS": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+        },
+        Action: "SQS:*",
+        Resource: "${aws_sqs_queue.tf_dead_letter_queue.arn}"
+      }
+    ]
+  })
+}
+
+# Use Terraform to create SQS Service
+# SQS Messages go to this queue
+resource "aws_sqs_queue" "tf_queue" {
+  name                       = "tf_queue"
+  delay_seconds              = 0
+  max_message_size           = 262144 # 256 KB
+  message_retention_seconds  = 86400  #  1 day
+  receive_wait_time_seconds  = 20     # seconds
+  visibility_timeout_seconds = 30     # seconds
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = aws_sqs_queue.tf_dead_letter_queue.arn
+    maxReceiveCount     = 2
+  })
+  fifo_queue                  = false
+}
+
+# Apply principle of least privilege on the SQS
+# owner allows permission for lambda and SDK.
+resource "aws_sqs_queue_policy" "tf_queue_access_policy" {
+  queue_url = aws_sqs_queue.tf_queue.id
+
+  policy = jsonencode({
+    "Version": "2012-10-17",
+    "Id": "sqspolicy",
+    "Statement": [
+      {
+        Sid: "_owner_statement",
+        Effect: "Allow",
+        Principal: {
+          "AWS": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+        },
+        Action: "SQS:*",
+        Resource: "${aws_sqs_queue.tf_queue.arn}"
+      }
+    ]
+  })
+}
+
+# Using Terraform IAM policy to create policy
+# This policy handles permissions that will part of an aws lambda role.
+# AWS lambda will then assume role and have access to write to S3, SQS, and CloudWatch.
 resource "aws_iam_policy" "tf_lambda_policy" {
   name        = "tf_lambda_policy"
   path        = "/"
@@ -50,15 +126,18 @@ resource "aws_iam_policy" "tf_lambda_policy" {
     "Statement": [
         {
            Effect: "Allow",
-           Action: "s3:PutObject",
-           Resource: "${aws_s3_bucket.tf_bucket.arn}/*"
+           Action: [
+              "s3:PutObject",
+              "sqs:SendMessage"
+           ],
+           Resource: [
+              "${aws_s3_bucket.tf_bucket.arn}/*",
+              "${aws_sqs_queue.tf_queue.arn}"
+           ]
         },
         {
             Effect: "Allow",
             Action: [
-                "sqs:ReceiveMessage",
-                "sqs:DeleteMessage",
-                "sqs:GetQueueAttributes",
                 "logs:CreateLogGroup",
                 "logs:CreateLogStream",
                 "logs:PutLogEvents"
@@ -70,6 +149,7 @@ resource "aws_iam_policy" "tf_lambda_policy" {
 }
 
 # Using Terraform Data Source to create Trust Relationship: "Assume Role Policy"
+# Allow lambda to be the only one that can assume the role.
 data "aws_iam_policy_document" "tf_lambda_assume_role" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -106,7 +186,21 @@ resource "aws_lambda_function" "tf_lambda" {
   }
 }
 
-# Let's apply principle of least privilege on the S3 Bucket
+resource "aws_lambda_function_event_invoke_config" "tf_lambda_destinations" {
+  function_name = aws_lambda_function.tf_lambda.function_name
+
+  destination_config {
+    on_failure {
+      destination = aws_sqs_queue.tf_queue.arn
+    }
+
+    on_success {
+      destination = aws_sqs_queue.tf_queue.arn
+    }
+  }
+}
+
+# Apply principle of least privilege on the S3 Bucket
 # The policy below deny's all writes except if its from the expected
 # lambda role unique id, which is a string type.
 # aws iam get-role --role-name <role-name>
@@ -133,18 +227,26 @@ resource "aws_s3_bucket_policy" "tf_bucket" {
   })
 }
 
-# Use Terraform to create SQS Service
-resource "aws_sqs_queue" "tf_queue" {
-  name                        = "tf_queue"
-  fifo_queue                  = false
+# Create SNS service
+# SNS will be used to trigger lambda processing
+resource "aws_sns_topic" "tf_topic" {
+  name = "tf_topic"
+  fifo_topic = "false"
+
 }
 
-# Use Terraform to add SQS as trigger for Lambda function
-resource "aws_lambda_event_source_mapping" "trigger_event" {
-  event_source_arn = aws_sqs_queue.tf_queue.arn
-  function_name    = aws_lambda_function.tf_lambda.arn
+# sns subscription: aws lambda subscription to sqs
+resource "aws_sns_topic_subscription" "tf_topic_target" {
+  topic_arn = aws_sns_topic.tf_topic.arn
+  protocol  = "lambda"
+  endpoint  = aws_lambda_function.tf_lambda.arn
 }
 
-
-# Success! Now from SQS console trigger event and 
-# verify lambda is triggered through cloudwatch
+# lambda resource-based policy: allow sns to invoke lambda function
+resource "aws_lambda_permission" "with_sns" {
+  statement_id  = "AllowExecutionFromSNS"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.tf_lambda.function_name
+  principal     = "sns.amazonaws.com"
+  source_arn    = aws_sns_topic.tf_topic.arn
+}
