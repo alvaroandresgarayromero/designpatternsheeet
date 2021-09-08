@@ -52,7 +52,7 @@ Getting Started
 
         root@5976e1426a62:/app/sandbox/aws/lambda/lambda_function/out# make aws-lambda-package-lambda
 
-3. Deploy lambda, S3, and SQS with all its configurations into AWS using Terraform
+3. Deploy the resources with all its configurations into AWS using Terraform
     Go to the lambda_function build directory, and move the 'lambda.zip' file into the terraform folder
 
     .. code-block:: bash
@@ -60,15 +60,15 @@ Getting Started
         root@5976e1426a62:/app/sandbox/aws/lambda/lambda_function/out# mv lambda.zip ../../terraform
 
     Go to the terraform directory, and deploy the resources.
-    In the AWS console, verify that the expected lambda and SQS resources have been created, SQS
-    is linked as a trigger, and that the expected role has been created.
+    In the AWS console, verify that the expected lambda, SNS, and SQS resources have been created,
+    and that the expected role has been created.
 
     .. code-block:: bash
 
         root@5976e1426a62:/app/sandbox/aws/lambda/terraform# terraform init
         root@5976e1426a62:/app/sandbox/aws/lambda/terraform# terraform apply
 
-    Verify aws lambda is functional by triggering synchronously lambda with the AWS CLI.
+    Verify aws lambda is functional by triggering a synchronously event with the AWS CLI.
     The payload value will be written into lambda_output.txt
 
     .. code-block:: bash
@@ -92,8 +92,8 @@ Getting Started
 
         aws s3 cp s3://tf-bucket/payload.txt .
 
-4. Compile the C++ app
-    Go to the app directory, and compile the application
+4. Run the aws demo app.
+    Go to the 'app' directory, and compile the application
 
     .. code-block:: bash
 
