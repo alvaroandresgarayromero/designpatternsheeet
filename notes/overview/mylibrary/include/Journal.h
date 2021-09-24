@@ -10,15 +10,17 @@
 
 // Journal class does not take other responsibilities
 class Journal {
-    std::string title;
-    std::vector<std::string> entries;
+private:
+    std::string m_title;
+    std::vector<std::string> m_entries;
 
 public:
-    Journal(const std::string &title) : title(title) {}
+    Journal(const std::string &title) : m_title(title) {}
 
     void add_entry(const std::string &new_entry);
 
-    friend std::ostream &operator<<(std::ostream &os, const Journal &journal);
+    std::vector<std::string> get_entries() const;
+
 };
 
 

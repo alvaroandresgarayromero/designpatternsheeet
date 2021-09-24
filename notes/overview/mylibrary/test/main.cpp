@@ -2,24 +2,27 @@
 #include <cstring>
 #include <unistd.h>
 
-#include "Journal.h"
-
+#include "Product.h"
 
 /* This is a scratch board app for testing, debugging, and developing new
  * library features by linking directly to the static library
  * in the build tree. */
 int main()
 {
-    char hostname[255];
-    memset(hostname, 0, sizeof(hostname));
-    gethostname(hostname, sizeof(hostname));
+    Product product_1{"car", Color::Blue, Size::Medium};
+    Product product_2{"tree", Color::Green, Size::Large};
+    Product product_3{"ball", Color::Blue, Size::Small};
 
-    std::cout << "Hello from: " << hostname << std::endl;
+    std::vector<Product*> products{&product_1, &product_2, &product_3};
 
-    Journal obj{"Dear Diary"};
-    obj.add_entry("I'm writing this from library test main function");
+    ColorSpecification color_spec{Color::Blue};
+    SizeSpecification size_spec{Size::Small};
+    auto spec = color_spec && size_spec;
 
-    std::cout << obj << std::endl;
-
+    ProductFilter pf;
+    for( auto &items : pf.filter(products, spec) )
+    {
+        std::cout << items->m_name << std::endl;
+    }
     return 0;
 }
