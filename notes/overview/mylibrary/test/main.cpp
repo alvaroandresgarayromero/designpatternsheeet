@@ -2,27 +2,20 @@
 #include <cstring>
 #include <unistd.h>
 
-#include "Product.h"
+#include "Machine.h"
 
 /* This is a scratch board app for testing, debugging, and developing new
  * library features by linking directly to the static library
  * in the build tree. */
 int main()
 {
-    Product product_1{"car", Color::Blue, Size::Medium};
-    Product product_2{"tree", Color::Green, Size::Large};
-    Product product_3{"ball", Color::Blue, Size::Small};
+    Document doc{"Senior Final Thesis"};
+    Machine my_minimal_printer;
+    my_minimal_printer.print(doc);
+    my_minimal_printer.scan(doc);
 
-    std::vector<Product*> products{&product_1, &product_2, &product_3};
 
-    ColorSpecification color_spec{Color::Blue};
-    SizeSpecification size_spec{Size::Small};
-    auto spec = color_spec && size_spec;
-
-    ProductFilter pf;
-    for( auto &items : pf.filter(products, spec) )
-    {
-        std::cout << items->m_name << std::endl;
-    }
+    Fax fax_machine;
+    fax_machine.fax(doc);
     return 0;
 }
