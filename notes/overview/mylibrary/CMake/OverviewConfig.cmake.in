@@ -1,9 +1,9 @@
 @PACKAGE_INIT@
 
 # Consumed to configure package targets and dependencies, if any
-# Finds and defines all Boost libraries (executables and headers)
-# Note that the executable must specify which boost library to link if the library
-# is not a header only.
+# Finds all Boost libraries (executables and headers)
+# Note that the executable app must specify which boost library to link
+# if the boost library is an executable.
 
 message(STATUS "Found ${CMAKE_FIND_PACKAGE_NAME}: ${CMAKE_CURRENT_LIST_FILE}")
 
