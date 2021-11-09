@@ -3,17 +3,11 @@
 #include <unistd.h>
 #include <memory>
 
-#include "prototype/prototype.h"
-#include "prototype/prototype_serialize.h"
+#include <creational/prototype/prototype.h>
+#include <creational/prototype/prototype_serialize.h>
 
-
-
-/* This is a scratch board app for testing, debugging, and developing new
- * library features by linking directly to the static library
- * in the build tree. */
 int main()
 {
-
     /* prototype specialization using factory design pattern,
      * we can define a contact business baseline that can be used to create new employees
      * without having to redefine the address and suite. */
@@ -50,7 +44,6 @@ int main()
     std::cout << "obj: " << obj << std::endl << "obj_shallow_copy: " << obj_shallow_copy << std::endl;
 
 #endif
-
 
     return 0;
 }

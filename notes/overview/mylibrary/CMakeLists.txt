@@ -79,6 +79,7 @@ include(CMakePackageConfigHelpers)
 set(CONFIG_NAME_IN ${PROJECT_NAME}Config)
 set(CONFIG_NAME_OUT ${PROJECT_NAME}Config)
 
+# Helpers function for creating config files that can be included by other projects to find and use a package.
 configure_package_config_file(
         ${CMAKE_CURRENT_LIST_DIR}/CMake/${CONFIG_NAME_IN}.cmake.in
         ${CMAKE_CURRENT_BINARY_DIR}/${CONFIG_NAME_OUT}.cmake
