@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.16.3)
 
-project(Creational)
+project(Structural)
 
 # Define project library name
 set(LIB_NAME_1 lib)
-set(LIB_NAME_2 creational)
+set(LIB_NAME_2 structural)
 set(LIBRARY_NAME ${LIB_NAME_1}${LIB_NAME_2})
 
 
